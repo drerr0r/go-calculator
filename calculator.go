@@ -19,7 +19,7 @@ func main() {
 	for {
 		// Запрос на ввод
 		fmt.Print("\nВыберите режим ввода:\n1 - Одна строка (например: 5 + 3)\n2 - Пошаговый ввод\nистория - Показать историю вычислений\nстоп - Выход\nВаш выбор: ")
-		choice, err := reader.ReadString('\n') // ← ДОБАВЛЕНО: err
+		choice, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Println("Ошибка чтения ввода:", err)
 			continue
@@ -50,7 +50,7 @@ func main() {
 
 func processSingleLineInput(reader *bufio.Reader) {
 	fmt.Print("Введите выражение (например 5 + 3): ")
-	input, err := reader.ReadString('\n') // ← ДОБАВЛЕНО: err
+	input, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Ошибка чтения ввода:", err)
 		return
@@ -104,13 +104,13 @@ func processStepByStepInput(reader *bufio.Reader) {
 
 	// Чтение первого числа
 	fmt.Print("Введите первое число: ")
-	inputA, err := reader.ReadString('\n') // ← ДОБАВЛЕНО: err
+	inputA, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Ошибка чтения ввода:", err)
 		return
 	}
 	inputA = strings.TrimSpace(inputA)
-	_, err = fmt.Sscanf(inputA, "%f", &a) // ← ИСПРАВЛЕНО: err вместо _
+	_, err = fmt.Sscanf(inputA, "%f", &a)
 	if err != nil {
 		fmt.Println("Ошибка чтения числа:", err)
 		return
@@ -118,7 +118,7 @@ func processStepByStepInput(reader *bufio.Reader) {
 
 	// Чтение оператора
 	fmt.Print("Введите операцию (+, -, *, /, х): ")
-	inputOp, err := reader.ReadString('\n') // ← ДОБАВЛЕНО: err
+	inputOp, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Ошибка чтения ввода:", err)
 		return
@@ -126,8 +126,8 @@ func processStepByStepInput(reader *bufio.Reader) {
 	operation = strings.TrimSpace(inputOp)
 
 	// Чтение второго числа
-	fmt.Print("Введите второе число: ")    // ← ИСПРАВЛЕНО: "второе" вместо "второго"
-	inputB, err := reader.ReadString('\n') // ← ДОБАВЛЕНО: err
+	fmt.Print("Введите второе число: ")
+	inputB, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Ошибка чтения ввода:", err)
 		return
@@ -161,7 +161,7 @@ func calculateAndPrint(a float64, b float64, operation string) {
 	case "x", "X", "х", "Х":
 		result = a * b
 	default:
-		fmt.Println("Ошибка: Неизвестная операция:", operation) // ← ИСПРАВЛЕНО: "Неизвестная"
+		fmt.Println("Ошибка: Неизвестная операция:", operation)
 		fmt.Println("Поддерживаемые операции: +, -, *, /")
 		validOperation = false
 	}
@@ -176,12 +176,10 @@ func calculateAndPrint(a float64, b float64, operation string) {
 	}
 }
 
-// ← ДОБАВЛЕНО: функция addToHistory
 func addToHistory(expression string) {
 	history = append(history, expression)
 }
 
-// ← ДОБАВЛЕНО: функция showHistory
 func showHistory() {
 	if len(history) == 0 {
 		fmt.Println("История вычислений пуста.")
