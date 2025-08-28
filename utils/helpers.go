@@ -38,7 +38,7 @@ func AddSpacesAroundOperators(expression string) string {
 	// Убираем лишние пробелы
 	finalResult := result.String()
 	finalResult = strings.TrimSpace(finalResult)
-	spaceRe := regexp.MustCompile("\\s+")
+	spaceRe := regexp.MustCompile(`\s+`)
 	finalResult = spaceRe.ReplaceAllString(finalResult, " ")
 
 	return finalResult
