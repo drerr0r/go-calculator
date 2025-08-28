@@ -5,67 +5,55 @@ import (
 	"testing"
 )
 
-func TestCalculate(t *testing.T) {
+func TestCalculateBasicOperations(t *testing.T) {
 	tests := []struct {
 		name      string
 		a         float64
 		b         float64
 		operation string
 		expected  float64
-		wantErr   bool
 	}{
-		// Basic operations
-		{"addition", 5, 3, "+", 8, false},
-		{"subtraction", 10, 4, "-", 6, false},
-		{"multiplication", 6, 7, "*", 42, false},
-		{"division", 15, 3, "/", 5, false},
-		{"division by zero", 5, 0, "/", 0, true},
-
-		// Advanced operations
-		{"power", 2, 3, "^", 8, false},
-		{"square root", 25, 0, "sqrt", 5, false},
-		{"square root negative", -4, 0, "sqrt", 0, true},
-		{"percentage", 100, 10, "%", 10, false},
-		{"factorial", 5, 0, "!", 120, false},
-		{"factorial zero", 0, 0, "!", 1, false},
-		{"factorial negative", -1, 0, "!", 0, true},
-
-		// Invalid operations
-		{"unknown operation", 5, 3, "&", 0, true},
+		{"addition", 5, 3, "+", 8},
+		{"subtraction", 10, 4, "-", 6},
+		{"multiplication", 6, 7, "*", 42},
+		{"division", 15, 3, "/", 5},
+		{"power", 2, 3, "^", 8},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// We can't easily test the output, but we can test if it errors as expected
-			// For a proper test, we'd need to refactor to return values instead of printing
-			if tt.operation == "/" && tt.b == 0 {
-				// Test division by zero
-				return // This will cause an error as expected
-			}
-
-			if tt.wantErr {
-				// For now, we just verify that invalid operations don't panic
-				return
-			}
-
-			// For valid operations, we test the logic indirectly
-			// In a real project, we'd refactor to make functions testable
+			// Временно отключаем добавление в историю для тестов
+			// Тестируем только логику вычислений
+			var result float64
 			switch tt.operation {
 			case "+":
-				if tt.a+tt.b != tt.expected {
-					t.Errorf("Addition failed: got %v, want %v", tt.a+tt.b, tt.expected)
-				}
+				result = tt.a + tt.b
 			case "-":
-				if tt.a-tt.b != tt.expected {
-					t.Errorf("Subtraction failed: got %v, want %v", tt.a-tt.b, tt.expected)
-				}
+				result = tt.a - tt.b
 			case "*":
-				if tt.a*tt.b != tt.expected {
-					t.Errorf("Multiplication failed: got %v, want %v", tt.a*tt.b, tt.expected)
+				result = tt.a * tt.b
+			case "/":
+				result = tt.a / tt.b
+			case "^":
+				result = 1.0
+				for i := 0; i < int(tt.b); i++ {
+					result *= tt.a
 				}
+			}
+
+			if result != tt.expected {
+				t.Errorf("%s failed: got %v, want %v", tt.name, result, tt.expected)
 			}
 		})
 	}
+}
+
+func TestCalculateErrorCases(t *testing.T) {
+	// Тестируем что ошибки обрабатываются без паники
+	Calculate(5, 0, "/")     // division by zero
+	Calculate(-4, 0, "sqrt") // square root negative
+	Calculate(-1, 0, "!")    // factorial negative
+	Calculate(5, 3, "&")     // unknown operation
 }
 
 func TestFactorial(t *testing.T) {

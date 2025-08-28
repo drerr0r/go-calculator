@@ -55,7 +55,7 @@ func Calculate(a float64, b float64, operation string) {
 	}
 
 	fmt.Printf("Результат: %s\n", expression)
-	history.AddToHistory(expression)
+	history.Add(expression) // Используем новую функцию Add
 }
 
 // factorial вычисляет факториал

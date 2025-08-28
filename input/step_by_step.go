@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"calculator/math"
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -34,9 +35,6 @@ func ProcessStepByStep(reader *bufio.Reader) {
 }
 
 func processBasicOperations(reader *bufio.Reader) {
-	var a, b float64
-	var operation string
-
 	fmt.Print("Введите первое число: ")
 	inputA, err := reader.ReadString('\n')
 	if err != nil {
@@ -44,7 +42,7 @@ func processBasicOperations(reader *bufio.Reader) {
 		return
 	}
 	inputA = strings.TrimSpace(inputA)
-	_, err = fmt.Sscanf(inputA, "%f", &a)
+	a, err := strconv.ParseFloat(inputA, 64)
 	if err != nil {
 		fmt.Println("Ошибка чтения числа:", err)
 		return
@@ -56,7 +54,7 @@ func processBasicOperations(reader *bufio.Reader) {
 		fmt.Println("Ошибка чтения ввода:", err)
 		return
 	}
-	operation = strings.TrimSpace(inputOp)
+	operation := strings.TrimSpace(inputOp)
 
 	fmt.Print("Введите второе число: ")
 	inputB, err := reader.ReadString('\n')
@@ -65,7 +63,7 @@ func processBasicOperations(reader *bufio.Reader) {
 		return
 	}
 	inputB = strings.TrimSpace(inputB)
-	_, err = fmt.Sscanf(inputB, "%f", &b)
+	b, err := strconv.ParseFloat(inputB, 64)
 	if err != nil {
 		fmt.Println("Ошибка чтения числа:", err)
 		return
@@ -86,7 +84,6 @@ func processPowerOperations(reader *bufio.Reader) {
 
 	switch choice {
 	case "1":
-		var a, b float64
 		fmt.Print("Введите число: ")
 		inputA, err := reader.ReadString('\n')
 		if err != nil {
@@ -94,7 +91,7 @@ func processPowerOperations(reader *bufio.Reader) {
 			return
 		}
 		inputA = strings.TrimSpace(inputA)
-		_, err = fmt.Sscanf(inputA, "%f", &a)
+		a, err := strconv.ParseFloat(inputA, 64)
 		if err != nil {
 			fmt.Println("Ошибка чтения числа:", err)
 			return
@@ -107,7 +104,7 @@ func processPowerOperations(reader *bufio.Reader) {
 			return
 		}
 		inputB = strings.TrimSpace(inputB)
-		_, err = fmt.Sscanf(inputB, "%f", &b)
+		b, err := strconv.ParseFloat(inputB, 64)
 		if err != nil {
 			fmt.Println("Ошибка чтения числа:", err)
 			return
@@ -116,7 +113,6 @@ func processPowerOperations(reader *bufio.Reader) {
 		math.Calculate(a, b, "^")
 
 	case "2":
-		var a float64
 		fmt.Print("Введите число: ")
 		inputA, err := reader.ReadString('\n')
 		if err != nil {
@@ -124,7 +120,7 @@ func processPowerOperations(reader *bufio.Reader) {
 			return
 		}
 		inputA = strings.TrimSpace(inputA)
-		_, err = fmt.Sscanf(inputA, "%f", &a)
+		a, err := strconv.ParseFloat(inputA, 64)
 		if err != nil {
 			fmt.Println("Ошибка чтения числа:", err)
 			return
@@ -135,8 +131,6 @@ func processPowerOperations(reader *bufio.Reader) {
 }
 
 func processPercentage(reader *bufio.Reader) {
-	var a, b float64
-
 	fmt.Print("Введите число: ")
 	inputA, err := reader.ReadString('\n')
 	if err != nil {
@@ -144,7 +138,7 @@ func processPercentage(reader *bufio.Reader) {
 		return
 	}
 	inputA = strings.TrimSpace(inputA)
-	_, err = fmt.Sscanf(inputA, "%f", &a)
+	a, err := strconv.ParseFloat(inputA, 64)
 	if err != nil {
 		fmt.Println("Ошибка чтения числа:", err)
 		return
@@ -157,7 +151,7 @@ func processPercentage(reader *bufio.Reader) {
 		return
 	}
 	inputB = strings.TrimSpace(inputB)
-	_, err = fmt.Sscanf(inputB, "%f", &b)
+	b, err := strconv.ParseFloat(inputB, 64)
 	if err != nil {
 		fmt.Println("Ошибка чтения числа:", err)
 		return
@@ -167,8 +161,6 @@ func processPercentage(reader *bufio.Reader) {
 }
 
 func processFactorialInput(reader *bufio.Reader) {
-	var a float64
-
 	fmt.Print("Введите число для вычисления факториала: ")
 	inputA, err := reader.ReadString('\n')
 	if err != nil {
@@ -176,7 +168,7 @@ func processFactorialInput(reader *bufio.Reader) {
 		return
 	}
 	inputA = strings.TrimSpace(inputA)
-	_, err = fmt.Sscanf(inputA, "%f", &a)
+	a, err := strconv.ParseFloat(inputA, 64)
 	if err != nil {
 		fmt.Println("Ошибка чтения числа:", err)
 		return
