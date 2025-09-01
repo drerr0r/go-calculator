@@ -69,7 +69,7 @@ func processBasicOperations(reader *bufio.Reader) {
 		return
 	}
 
-	math.CalculateLegacy(a, b, operation) // Используем CalculateLegacy вместо Calculate
+	math.CalculateLegacy(a, b, operation)
 }
 
 func processPowerOperations(reader *bufio.Reader) {
@@ -110,7 +110,7 @@ func processPowerOperations(reader *bufio.Reader) {
 			return
 		}
 
-		math.CalculateLegacy(a, b, "^") // Используем CalculateLegacy вместо Calculate
+		math.CalculateLegacy(a, b, "^")
 
 	case "2":
 		fmt.Print("Введите число: ")
@@ -126,7 +126,7 @@ func processPowerOperations(reader *bufio.Reader) {
 			return
 		}
 
-		math.CalculateLegacy(a, 0, "sqrt") // Используем CalculateLegacy вместо Calculate
+		math.CalculateLegacy(a, 0, "sqrt")
 	}
 }
 
@@ -157,7 +157,7 @@ func processPercentage(reader *bufio.Reader) {
 		return
 	}
 
-	math.CalculateLegacy(a, b, "%") // Используем CalculateLegacy вместо Calculate
+	math.CalculateLegacy(a, b, "%")
 }
 
 func processFactorialInput(reader *bufio.Reader) {
@@ -174,5 +174,5 @@ func processFactorialInput(reader *bufio.Reader) {
 		return
 	}
 
-	math.CalculateLegacy(a, 0, "!") // Используем CalculateLegacy вместо Calculate
+	math.CalculateLegacy(a, 0, "!")
 }
